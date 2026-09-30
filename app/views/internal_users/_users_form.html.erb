@@ -1,0 +1,21 @@
+<% if User.current.admin? %>
+<p>
+  <%= form.select :internal_forced,
+                  [[l(:label_internal_status_auto), ''],
+                   [l(:label_internal_status_forced_internal), 'true'],
+                   [l(:label_internal_status_forced_external), 'false']],
+                  :selected => user.internal_forced.nil? ? '' : user.internal_forced.to_s %>
+  <em class="info" id="internal-status-info">
+    <%= render :partial => 'internal_users/internal_status_info', :locals => { :user => user } %>
+  </em>
+</p>
+<% if RedmineInternalUsers.directory && user.persisted? %>
+<p>
+  <%= link_to sprite_icon('reload', l(:label_internal_status_check)),
+              check_user_internal_status_path(user),
+              :method => :post, :remote => true, :id => 'internal-status-check',
+              :class => 'icon icon-reload' %>
+  <span id="internal-status-result"></span>
+</p>
+<% end %>
+<% end %>

@@ -1,0 +1,24 @@
+<%# Only phrasing content: rendered in a paragraph of the tabular form %>
+<span class="<%= error ? 'flash error' : 'flash notice' %>" style="display: block; margin: 6px 0 0;">
+<% if error %>
+  <%= l(:text_internal_status_check_failed, :message => error) %>
+<% else %>
+  <% status = l(user.internal? ? :label_internal_status_internal : :label_internal_status_external) %>
+  <% if !user.internal_forced.nil? %>
+    <%= l(:text_internal_status_check_forced) %>
+  <% elsif result[:changed] %>
+    <%= l(:text_internal_status_check_updated, :status => status) %>
+  <% else %>
+    <%= l(:text_internal_status_check_unchanged, :status => status) %>
+  <% end %>
+  <% result[:mails].each do |mail| %>
+    <br><%= mail %> : <%= l(result[:found].include?(mail) ? :label_internal_status_mail_found : :label_internal_status_mail_not_found) %>
+  <% end %>
+  <% if result[:mails].empty? %>
+    <br><%= l(:text_internal_status_no_mail) %>
+  <% end %>
+  <% result[:details].each do |line| %>
+    <br><small><%= line %></small>
+  <% end %>
+<% end %>
+</span>

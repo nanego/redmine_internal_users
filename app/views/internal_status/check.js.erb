@@ -1,0 +1,4 @@
+$('#internal-status-result').html('<%= escape_javascript(render(:partial => 'internal_status/result', :locals => { :user => @user, :result => @result, :error => @error })) %>');
+<% unless @error %>
+$('#internal-status-info').html('<%= escape_javascript(render(:partial => 'internal_users/internal_status_info', :locals => { :user => @user })) %>');
+<% end %>

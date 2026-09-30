@@ -1,0 +1,6 @@
+<% status = l(user.internal? ? :label_internal_status_internal : :label_internal_status_external) %>
+<% if user.internal_checked_at %>
+  <%= l(:text_internal_status_checked, :status => status, :date => format_time(user.internal_checked_at)) %>
+<% else %>
+  <%= l(:text_internal_status_never_checked, :status => status) %>
+<% end %>
