@@ -18,6 +18,15 @@ module RedmineInternalUsers
       internal_forced.nil? ? internal? : internal_forced
     end
     alias_method :internal_user, :internal_user?
+
+    # How the status is set: 'auto' (from the directory), or forced to 'internal' or 'external'
+    def internal_status_mode
+      case internal_forced
+      when nil then 'auto'
+      when true then 'internal'
+      else 'external'
+      end
+    end
   end
 end
 

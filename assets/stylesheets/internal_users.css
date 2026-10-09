@@ -1,0 +1,4 @@
+.badge-internal {
+  color: var(--oc-teal-9);
+  border: 1px solid var(--oc-teal-9);
+}

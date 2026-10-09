@@ -1,0 +1,6 @@
+<% if User.current.admin? && user.internal_user? %>
+  <% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'internal_users', :plugin => 'redmine_internal_users' %>
+  <% end %>
+  <span class="badge badge-internal"><%= l(:field_internal_user) %></span>
+<% end %>

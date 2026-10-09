@@ -28,6 +28,16 @@ describe "Internal users" do
     end
   end
 
+  describe "User#internal_status_mode" do
+    it "tells whether the status is computed or forced" do
+      expect(external.internal_status_mode).to eq 'auto'
+      external.internal_forced = true
+      expect(external.internal_status_mode).to eq 'internal'
+      external.internal_forced = false
+      expect(external.internal_status_mode).to eq 'external'
+    end
+  end
+
   describe "internal_forced" do
     it "is only settable by an administrator" do
       expect(external.safe_attribute?('internal_forced', User.find(1))).to be true
