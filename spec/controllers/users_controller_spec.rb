@@ -37,7 +37,7 @@ describe UsersController, :type => :controller do
 
     it "is not shown to non-administrators" do
       User.find(2).update_columns(internal: true)
-      @request.session[:user_id] = 3
+      @request.session[:user_id] = 2
 
       get :show, :params => { :id => 2 }
 
